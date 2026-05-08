@@ -57,7 +57,7 @@
 
 ## Wiki (LLM-Maintained)
 
-Last compiled: 2026-05-08 — 11 articles across 4 frameworks
+Last compiled: 2026-05-08 (pass 2) — 20 articles across 6 frameworks
 
 ### FedRAMP
 - [[Wiki/fedramp-baseline-overview]] — Low / LI-SaaS / Moderate / High baseline comparison, parameter overrides
@@ -66,19 +66,29 @@ Last compiled: 2026-05-08 — 11 articles across 4 frameworks
 - [[Wiki/fedramp-vulnerability-management]] — RA-5 / SI-2 SLAs, POA&M integration, FedRAMP 20x CVM
 - [[Wiki/fedramp-continuous-monitoring]] — ConMon deliverables calendar, CA-7, FedRAMP 20x changes
 - [[Wiki/fedramp-nist-800-53-relationship]] — Layering model, parameter overrides, Rev 4→5 transition
+- [[Wiki/fedramp-authorization-process]] — RAR → SSP/SAP/SAR → ATO/P-ATO → ConMon pathway
 
 ### NIST 800-53
 - [[Wiki/nist-800-53-control-families]] — All 20 families, key controls, AWS implementation patterns
 
+### NIST 800-171 / CUI
+- [[Wiki/nist-800-171-cui-protection]] — 17 families, CUI scope, CMMC relationship, DFARS 252.204-7012
+
 ### OWASP LLM
 - [[Wiki/owasp-llm-top10-overview]] — All 10 risks, cross-framework mappings
 - [[Wiki/owasp-llm01-prompt-injection]] — Direct/indirect injection, mitigations
+- [[Wiki/owasp-llm02-sensitive-information-disclosure]] — PII leakage, training data exposure
+- [[Wiki/owasp-llm04-data-model-poisoning]] — Training corruption, backdoors, sleeper agents
+- [[Wiki/owasp-llm05-improper-output-handling]] — XSS/SQLi/RCE from unsanitized output
 - [[Wiki/owasp-llm06-excessive-agency]] — Excessive functionality/permissions/autonomy, agentic risk
+- [[Wiki/owasp-llm07-system-prompt-leakage]] — Credential exposure, external enforcement principle
+- [[Wiki/owasp-llm10-unbounded-consumption]] — Denial of Wallet, model extraction, rate limiting
 
 ### NIST AI RMF
 - [[Wiki/nist-ai-rmf-core-functions]] — Govern / Map / Measure / Manage, trustworthiness, federal context
 
-### DoD / ICAM
+### DoD / ICAM / Impact Levels
+- [[Wiki/dod-srg-cloud-impact-levels]] — IL2/IL4/IL5/IL6, FedRAMP+, DoD PA pathway (CSP SRG V1R6)
 - [[Wiki/dodi-8520-04-access-management-icam]] — DoDI 8520.04 ICAM, Zero Trust, FedRAMP CSP implications
 
 ## Quick Reference
