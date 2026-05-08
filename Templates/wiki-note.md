@@ -5,18 +5,28 @@ status: draft
 tags: []
 created: <% tp.date.now("YYYY-MM-DD") %>
 updated: <% tp.date.now("YYYY-MM-DD") %>
+sources:
+  - "[[Sources/]]"
+related:
+  - "[[Wiki/]]"
 ---
 
 # <% tp.file.title %>
 
-## Summary
-
-
+> [!abstract] Summary
+> 
 
 ## Source References
 
-> Quoted source text here — [Source](../Sources/)
+> [!quote] Source Title
+> Quoted source text here
+> — [[Sources/]]
+
+## Cross-Framework Mapping
+
+> [!info] Cross-Framework
+> - 
 
 ## Related Notes
 
-- 
+- [[]]

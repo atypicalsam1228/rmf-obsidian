@@ -1,0 +1,319 @@
+---
+title: "Cloud Computing Mission Owner Network Security Requirements Guide"
+type: reference
+framework: dod-srg
+source_format: converted
+created: 2026-05-08
+tags:
+  - dod-srg
+  - xccdf
+  - disa
+  - fedramp
+---
+
+# Cloud Computing Mission Owner Network Security Requirements Guide
+
+> Source: `U_Cloud_Computing_Mission_Owner_NET_SRG_V1R2_Manual-xccdf.xml`  
+> Benchmark ID: `Cloud_Computing_Mission_Owner_SRG`  
+> Version: `1`
+
+## Overview
+
+This Security Requirements Guide is published as a tool to improve the security of Department of Defense (DOD) information systems. The requirements are derived from the National Institute of Standards and Technology (NIST) 800-53 and related documents. Comments or proposed revisions to this document should be sent via email to the following address: disa.stig_spt@mail.mil.
+
+## References
+
+
+## Profiles
+
+| Profile ID | Title |
+|---|---|
+| `MAC-1_Classified` | I - Mission Critical Classified |
+| `MAC-1_Public` | I - Mission Critical Public |
+| `MAC-1_Sensitive` | I - Mission Critical Sensitive |
+| `MAC-2_Classified` | II - Mission Support Classified |
+| `MAC-2_Public` | II - Mission Support Public |
+| `MAC-2_Sensitive` | II - Mission Support Sensitive |
+| `MAC-3_Classified` | III - Administrative Classified |
+| `MAC-3_Public` | III - Administrative Public |
+| `MAC-3_Sensitive` | III - Administrative Sensitive |
+
+## Rules
+
+### SRG-NET-000205
+
+> Group ID: `V-259863`
+
+<GroupDescription></GroupDescription>
+
+#### The Infrastructure as a Service (IaaS)/Platform as a Service (PaaS) must implement a security stack that restricts traffic flow inbound and outbound between the IaaS and the Boundary Cloud Access Point (BCAP) or Internal Cloud Access Point (ICAP) connection.
+
+> Rule ID: `SV-259863r945577_rule` | Severity: **HIGH**
+
+**Description:** DOD users on the internet may first connect to their assigned Defense Information Systems Network (DISN) Virtual Private Network (VPN) before accessing DOD private applications. The virtual environment may be composed of an array of cloud service offerings from a particular cloud service provider (CSP). The DISN security architecture provides the users with connectivity to the cloud service environment. The architecture mitigates potential damages to the DISN and provides the ability to detect and prevent an attack before it reaches the DISN. Note: Off-premise CSP infrastructure having a Level 2 Provisional Authorization (PA) is directly connected to the internet. All traffic to and from a Level 2 cloud service offering (CSO) serving Level 2 missions and their mission virtual networks will connect via the internet. CSP infrastructure (dedicated to DOD) located inside the Base, Camp, Post, and Station (B/C/P/S) "fence line" (i.e., on premise) connects via an ICAP. The architecture of ICAPs may vary and may leverage existing capabilities, such as the information assurance stack protecting a DOD data center or a Joint Regional Security Stack (JRSS). An ICAP may also have special capabilities to support specific missions, CSP types (commercial or DOD), or cloud services. CSP infrastructure (shared with non-DOD or dedicated to the DOD) located outside the B/C/P/S fence line that connects to the DODIN/NIPRNet does so via one or more BCAPs. The BCAP terminates dedicated circuits and VPN connections originating within the CSP's network infrastructure and/or Mission Owner's virtual networks. All connections between a CSP's network infrastructure or Mission Owner's virtual networks that is accessed via or from the NIPRNet/SIPRNet must connect to the DODIN via a BCAP. For dedicated infrastructure with a DODIN connection (Levels 4–6), the Mission Owner will ensure a virtual security stack is configured in accordance with DODI 8551. false
+
+**Check:** If this is an Impact Level 2 IaaS/PaaS implementation, this requirement is not applicable. 
+
+Review the architecture for the IaaS.
+
+Verify that for dedicated infrastructure mission Impact Levels 4–5, the IaaS implements a security stack that restricts traffic flow inbound and outbound between the IaaS/PaaS and the BCAP or ICAP connection.
+
+For IaaS Levels 4–5, if the IaaS does not implement a security stack that restricts traffic flow inbound and outbound between the IaaS/PaaS and the BCAP or ICAP connection, this is a finding.
+
+**Fix:** FedRAMP Moderate, High.
+
+For dedicated infrastructure with an ICAP/BCAP connection (Levels 4–5 and on-premise Impact Level 2), ensure the IaaS/PaaS implements a security stack that restricts traffic flow inbound and outbound between the IaaS/PaaS and the BCAP or ICAP connection.
+
+**References:** `CCI-001097`
+
+---
+
+### SRG-NET-000205
+
+> Group ID: `V-259864`
+
+<GroupDescription></GroupDescription>
+
+#### The Mission Owner's internet-facing applications must be configured to traverse the Cloud Access Point (CAP) and Virtual Datacenter Security Stack (VDSS) prior to communicating with the internet.
+
+> Rule ID: `SV-259864r945580_rule` | Severity: **HIGH**
+
+**Description:** The CAP and VDSS architectures mitigate potential damages to the Defense Information Systems Network (DISN) and provide the ability to detect and prevent an attack before it reaches the DISN. All traffic bound for the internet will traverse the BCAP/ICAP and IAP. Mission applications may be internet facing; internet-facing applications can be unrestricted or restricted (requiring CAC authentication). DOD users on the internet may first connect to their assigned DISN Virtual Private Network (VPN) before accessing Mission Owner enclave or private applications. false
+
+**Check:** If this is a Software as a Service (SaaS), this is not a finding.
+
+If Impact Level 2, but the cloud service provider (CSP) has control over the environment, this is not a finding.
+
+Verify that virtual internet-facing applications are configured to traverse the CAP and VDSS prior to communicating with the internet.
+
+If virtual internet-facing applications permit direct access to the CSP or the internet, this is a finding.
+
+**Fix:** This applies to all Impact Levels.
+FedRAMP Moderate, High.
+
+Configure virtual internet-facing applications to traverse the CAP and VDSS prior to communicating with the internet.
+
+**References:** `CCI-001097`
+
+---
+
+### SRG-NET-000205
+
+> Group ID: `V-259865`
+
+<GroupDescription></GroupDescription>
+
+#### The Mission Owner of the Infrastructure as a Service (IaaS)/Platform as a Service (PaaS) must configure scanning using an Assured Compliance Assessment Solution (ACAS) server or solution that meets DOD scanning and reporting requirements.
+
+> Rule ID: `SV-259865r945583_rule` | Severity: **MEDIUM**
+
+**Description:** Without the use of automated mechanisms to scan for security flaws on a continuous and/or periodic basis, the operating system or other system components may remain vulnerable to the exploits presented by undetected software flaws. Implement scanning using an ACAS server in accordance with USCYBERCOM TASKORD 13-670.
+- Use an ACAS Security Center server within NIPRNet or within an associated common virtual services environment in the same cloud service offering (CSO).
+- Implement a secure (encrypted) connection or path between the ACAS server and its assigned ACAS Security Center. Impact Level 2: Applies to IaaS/PaaS CSOs where the Mission Owner has control over the environment. In this case, Mission Owners must provide their own enclave boundary protections or leverage an enterprise-level application protection service instantiated within the same CSO. false
+
+**Check:** If this is a Software as a Service (SaaS), this is not applicable.
+
+This applies to all Impact Levels.
+
+Review the configuration of the IaaS/PaaS. Verify that the IP address of an ACAS server is configured. Verify the flaw remediation data is also being communicated to the cybersecurity service provider (CSSP).
+
+If the PaaS/IaaS does not implement scanning using an ACAS server or CSP-provided solution that meets DOD scanning and reporting requirements, this is a finding.
+
+**Fix:** This applies to all Impact Levels.
+FedRAMP Moderate, High.
+
+Configure the IP address of an ACAS server or another solution that meets DOD scanning and reporting requirements.
+
+**References:** `CCI-001097`
+
+---
+
+### SRG-NET-000205
+
+> Group ID: `V-259866`
+
+<GroupDescription></GroupDescription>
+
+#### The Infrastructure as a Service (IaaS)/Platform as a Service (PaaS) must be configured to maintain separation of all management and data traffic.
+
+> Rule ID: `SV-259866r945586_rule` | Severity: **MEDIUM**
+
+**Description:** The Virtual Datacenter Management system provides a management plane for privileged access and communications. Separation of management and user traffic, including access to the customer service portal, is provided to the DOD Mission Owner by the cloud service provider (CSP) to provision and configure cloud service offerings. Additionally, service endpoints for application program interfaces (APIs) and command line interfaces (CLIs) are available as part of the Customer Portal network. These systems can be accessed through the internet by DOD privileged users only (e.g., DOD system and network administrators). false
+
+**Check:** This applies to all Impact Levels.
+
+If this is a Software as a Service (SaaS) implementation, this is not a finding.
+
+Verify the IaaS/PaaS is configured to maintain logical separation of all management and data traffic.
+
+If the IaaS/PaaS does not maintain separation of all management and data traffic, this is a finding.
+
+**Fix:** This applies to all Impact Levels.
+FedRAMP Moderate, High.
+
+Configure the IaaS/PaaS to maintain separation of all management and data traffic.
+
+**References:** `CCI-001097`
+
+---
+
+### SRG-NET-000383
+
+> Group ID: `V-259867`
+
+<GroupDescription></GroupDescription>
+
+#### For Infrastructure as a Service (IaaS)/Platform as a Service (PaaS), the Mission Owner must configure an intrusion detection and prevention system (IDPS) to protect DOD virtual machines (VMs), services, and applications.
+
+> Rule ID: `SV-259867r945589_rule` | Severity: **HIGH**
+
+**Description:** Network environments and applications installed using an IaaS/PaaS cloud service offering where the Mission Owner has control over the environment must comply with DOD network infrastructure and host policies. Putting an application in the cloud does not take care of all security responsibilities. Without coordinated reporting between cloud service environments used for the DOD mission, it is not possible to identify the true scale and possible target of an attack. An IDPS protects Mission Owner enclaves and applications hosted in an off-premise cloud service offering and may be deployed within the cloud service environment, cloud access point, or supporting Core Data Center (CDC). Additionally, an IDPS facilitates the reporting of incidents and aids in the coordination of response actions between all stakeholders of the cloud service offering and/or mission owner applications. The Mission Owner and/or their cybersecurity service provider (CSSP) must be able to monitor the virtual network boundary. For dedicated infrastructure with a DODIN connection (Levels 4–6), implement an IDPS that monitors and works with the virtual security infrastructure (e.g., firewall, routing tables, web application firewall, etc.) to protect traffic flow inbound and outbound to/from the virtual network to the DODIN connection. false
+
+**Check:** If this is a Software as a Service (SaaS), this is not applicable.
+
+Review the Service Level Agreement and architecture documentation. Verify the virtual IDPS is in place by inspecting the architecture diagrams. Verify it is placed to monitor and protect the IaaS, PaaS, and interconnected host VMs.
+
+Verify a secure (encrypted) connection exists between the virtual IDPS capabilities and the CSSP responsible for the mission system/application.
+
+If the Mission Owner has not configured the IaaS or PaaS IDPS to monitor and protect the IaaS and interconnected VMs, this is a finding.
+
+**Fix:** This applies to all Impact Levels.
+FedRAMP Moderate, High.
+
+Configure a virtual IDPS to monitor and protect the DOD VMs, services, and applications.
+
+**References:** `CCI-002656`
+
+---
+
+### SRG-NET-000390
+
+> Group ID: `V-259868`
+
+<GroupDescription></GroupDescription>
+
+#### The Mission Owner of the Infrastructure as a Service (IaaS) or Platform as a Service (PaaS) must continuously monitor and protect inbound communications from external systems, other IaaS within the same cloud service environment, or collocated mission applications for unusual or unauthorized activities or conditions.
+
+> Rule ID: `SV-259868r945592_rule` | Severity: **MEDIUM**
+
+**Description:** Evidence of malicious code is used to identify potentially compromised information systems or information system components. Unusual/unauthorized activities or conditions related to information system inbound communications traffic include, for example, internal traffic that indicates the presence of malicious code within organizational information systems or propagating among system components, the unauthorized exporting of information, or signaling to external information systems. Anomalies within organizational information systems include, for example, large file transfers, long-time persistent connections, unusual protocols and ports in use, and attempted communications with suspected malicious external addresses. This function may be deployed within the cloud service environment cloud access point or supporting Core Data Center (CDC). false
+
+**Check:** If this is a Software as a Service (SaaS), this is not applicable.
+
+Inspect the firewall and/or intrusion detection and prevention system (IDPS) access control lists (ACLs) and filters on the firewall inbound interfaces. 
+
+Verify these rules are configured for continuous monitoring. 
+
+Verify the ACLs and security rules include rules and ACLs that detect and filter unusual or unauthorized activities or conditions such as large file transfers, persistent connections, unusual protocols and ports in use, communication with unauthorized entities, or unusually high traffic from particular segments or devices.
+
+If the IaaS/PaaS does not continuously monitor inbound communications from external systems, other IaaS, or collocated mission applications within the same cloud service environment for unusual or unauthorized activities or conditions, this is a finding.
+
+**Fix:** This applies to all Impact Levels.
+FedRAMP Moderate, High.
+
+Configure the firewall and/or IDPS for continuous monitoring of all communications inbound to the virtual IaaS or PaaS.
+
+Configure the ACLs and security rules to detect and filter unusual or unauthorized activities or conditions such as large file transfers, persistent connections, unusual protocols and ports in use, communication with unauthorized entities, or unusually high traffic from particular segments or devices.
+
+**References:** `CCI-002661`
+
+---
+
+### SRG-NET-000391
+
+> Group ID: `V-259869`
+
+<GroupDescription></GroupDescription>
+
+#### The Mission Owner of the Infrastructure as a Service (IaaS) must continuously monitor outbound communications to other systems and enclaves for unusual or unauthorized activities or conditions.
+
+> Rule ID: `SV-259869r945595_rule` | Severity: **MEDIUM**
+
+**Description:** Evidence of malicious code is used to identify potentially compromised information systems or information system components. Unusual/unauthorized activities or conditions related to outbound communications traffic include, for example, internal traffic that indicates the presence of malicious code within organizational information systems or propagating among system components, the unauthorized exporting of information, or signaling to external information systems. Anomalies within organizational information systems include, for example, large file transfers, long-time persistent connections, unusual protocols and ports in use, and attempted communications with suspected malicious external addresses. This function may be deployed within the cloud service environment, the meet-me point, cloud access point, or supporting Core Data Center (CDC). false
+
+**Check:** If this is a Software as a Service (SaaS), this is not applicable.
+
+Inspect the firewall and/or or intrusion detection and prevention system (IDPS) access control lists (ACLs) and filtering rules that filter traffic on any outbound interface from the IaaS and systems. 
+
+Verify these rules are configured for continuous monitoring. 
+
+Verify the ACLs and security rules include rules and ACLs that detect and filter unusual or unauthorized activities or conditions such as large file transfers, persistent connections, unusual protocols and ports in use, communication with unauthorized entities, or other unusually high traffic from particular segments or devices.
+
+If the IaaS/PaaS does not continuously monitor outbound communications to other enclaves and systems for unusual or unauthorized activities or conditions, this is a finding.
+
+**Fix:** This applies to all Impact Levels. 
+FedRAMP Moderate, High.
+
+Configure the firewall and/or IDPS for continuous monitoring of all communications outbound from the virtual IaaS or PaaS.
+
+Configure any ACLs and filtering rules on outbound interfaces to detect and filter unusual or unauthorized activities or conditions such as large file transfers, persistent connections, unusual protocols and ports in use, communication with unauthorized entities, or other unusually high traffic from particular segments or devices.
+
+**References:** `CCI-002662`
+
+---
+
+### SRG-NET-000580
+
+> Group ID: `V-259870`
+
+<GroupDescription></GroupDescription>
+
+#### The Mission Owner must configure the Infrastructure as a Service (IaaS)/Platform to use certificate path validation to ensure revoked user credentials are prohibited from establishing a user or machine session.
+
+> Rule ID: `SV-259870r1056198_rule` | Severity: **HIGH**
+
+**Description:** A certificate's certification path is the path from the end entity certificate to a trusted root certification authority (CA). Certification path validation is necessary for a relying party to make an informed decision regarding acceptance of an end entity certificate. Certification path validation includes checks such as certificate issuer trust, time validity, and revocation status for each certificate in the certification path. Revocation status information for CA and subject certificates in a certification path is commonly provided via certificate revocation lists (CRLs) or online certificate status protocol (OCSP) responses. false
+
+**Check:** This applies to all Impact Levels.
+
+If this is a Software as a Service (SaaS) implementation, this is not a finding.
+
+Verify that certificate path validation is implemented to ensure revoked user and/or machine credentials are prohibited from establishing a user or machine session.
+
+If the cloud IaaS/PaaS is not configured to use OCSP or CRLDP to ensure revoked credentials are prohibited from establishing an allowed session, this is a finding.
+
+**Fix:** This applies to all Impact Levels.
+FedRAMP Moderate, High.
+
+Configure the IaaS/PaaS to use OCSP or CRLDP to ensure revoked credentials are prohibited from establishing an allowed session. This requirement applies to the use of both user and machine credentials.
+
+**References:** `CCI-000185`
+
+---
+
+### SRG-NET-000580
+
+> Group ID: `V-259871`
+
+<GroupDescription></GroupDescription>
+
+#### The Mission Owner must configure the Infrastructure as a Service (IaaS)/Platform as a Service (PaaS) Cloud Service to use DOD-approved OCSP responder or CRL to validate certificates used for PKI-based authentication.
+
+> Rule ID: `SV-259871r1056199_rule` | Severity: **HIGH**
+
+**Description:** To provide assurances that certificates are validated by the correct responders, the Mission Owner must ensure they are using a valid DOD OCSP responder for remote system DOD Common Access Card (CAC) two-factor authentication of DOD privileged users to systems instantiated within the cloud service environment. When a Mission Owner is responsible for authenticating entities and/or identifying a hosted DOD information system, the Mission Owner must configure CAC/PKI for remote access for privileged users at all Impact Levels. CAC/PKI access is required for nonprivileged users of access to Impact Levels 4–6. Impact Level 6: When an on-premises, use NSS PKI. Enforce the use of a physical token referred to as the CNSS NSS Hardware Token for the authentication of DOD Mission Owner and CSP privileged and nonprivileged end users. When implementing NSS PKI, use NSS OCSP or CRL resources for checking revocation of NSS certificates and NSS Certificate Authorities and follow CNSS/NSA instructions for the management and protection of cryptographic keys. CNSS-issued PKI server certificates will be used to identify the CSP's DOD customer ordering/service management portals and SaaS applications and services contracted by and dedicated to DOD use. false
+
+**Check:** This applies to all Impact Levels.
+
+If this is a Software as a Service (SaaS) implementation, this is not a finding.
+
+Verify that a DOD-approved OCSP responder or CRL is used to validate certificates used for PKI-based authentication.
+
+If the cloud IaaS/PaaS is not configured to use DOD-approved OCSP responder or CRL to validate certificates used for PKI-based authentication, this is a finding.
+
+**Fix:** This applies to all Impact Levels.
+FedRAMP Moderate, High.
+
+Configure the IaaS/PaaS to use DOD-approved OCSP responder or CRL to validate certificates used for PKI-based authentication.
+
+Configure the system to implement the following access policy:
+- Configure CAC/PKI for remote access for privileged users at all Impact Levels. CAC/PKI access is required for nonprivileged users of access to Impact Levels 4–6.
+
+- Impact Level 6: When an on-premises, use NSS PKI. Enforce the use of a physical token referred to as the CNSS NSS Hardware Token for the authentication of DOD Mission Owner and CSP privileged and nonprivileged end users. When implementing NSS PKI, use NSS OCSP or CRL resources for checking revocation of NSS certificates and NSS Certificate Authorities and must follow CNSS/NSA instructions for the management and protection of cryptographic keys. CNSS-issued PKI server certificates will be used to identify the CSP’s DOD customer ordering/service management portals and SaaS applications and services contracted by and dedicated to DOD use.
+
+**References:** `CCI-000185`
+
+---
+
+
+> **Summary:** 9 rules across 9 groups
