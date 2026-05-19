@@ -88,6 +88,39 @@ related:
 - All cryptography must use FIPS-validated modules or NSA-approved cryptography. Applies to: data in transit, data at rest, backups, media transport, authenticator storage, VPN.
 - SSP Section 10.3 must be fully populated with cryptographic module details (DAR and DIT).
 
+### Encryption at Rest for Federal Customer Data (SC-28, SC-28(1))
+
+> [!quote] FedRAMP Moderate — SC-28 Parameters
+> "SC-28 [confidentiality AND integrity]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#SC-28 — Protection of Information at Rest|SC-28]]
+
+> [!quote] FedRAMP Moderate — SC-28(1) Parameters
+> "SC-28 (1)-1 [all information system components storing federal customer data or system data that must be protected at the High or Moderate impact levels]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#SC-28 (1) — Protection of Information at Rest|SC-28(1)]]
+
+> [!quote] FedRAMP Moderate — SC-28 Guidance
+> "When leveraging encryption from underlying IaaS/PaaS: While some IaaS/PaaS services provide encryption by default, many require encryption to be configured, and enabled by the customer. The CSP has the responsibility to verify encryption is properly configured."
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#SC-28 — Protection of Information at Rest|SC-28]]
+
+- **Controls:** SC-28, SC-28(1)
+- Both **confidentiality and integrity** protection are required for information at rest — not just one. Cryptographic mechanisms must be applied to **all components** storing federal customer data or system data at Moderate/High impact.
+- CSPs must actively verify IaaS/PaaS encryption is configured — default-on does not mean correctly configured.
+- Cryptography used must comply with SC-13 (FIPS 140-2/3).
+
+### Cryptographic Key Management per Federal Requirements (SC-12)
+
+> [!quote] FedRAMP Moderate — SC-12 Parameters
+> "SC-12 [In accordance with Federal requirements]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#SC-12 — Cryptographic Key Establishment and Management|SC-12]]
+
+> [!quote] FedRAMP Moderate — SC-12 Guidance
+> "Must meet applicable Federal Cryptographic Requirements. See References Section of control."
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#SC-12 — Cryptographic Key Establishment and Management|SC-12]]
+
+- **Controls:** SC-12
+- Key establishment and management must follow applicable federal cryptographic requirements. Covers key generation, distribution, storage, access, retirement, and destruction.
+- SC-13 FIPS/NSA requirements apply to the cryptographic mechanisms used for key management.
+
 ### Encrypted DNS and HTTP Traffic (SC-8, M-22-09)
 
 > [!quote] FedRAMP Moderate — SC-8 Guidance
@@ -97,6 +130,19 @@ related:
 - **Controls:** SC-8, SC-8(1)
 - **Authority:** OMB M-22-09 (Zero Trust Strategy)
 - All DNS requests and HTTP traffic within the environment must be encrypted. Aligns with Zero Trust architecture requirements.
+
+---
+
+## Boundary Protection
+
+### Firewall Exception Review Every 180 Days (SC-7(4))
+
+> [!quote] FedRAMP Moderate — SC-7(4)(e) Parameter
+> "SC-7 (4) (e) [at least every 180 days or whenever there is a change in the threat environment that warrants a review of the exceptions]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#SC-7 (4) — Boundary Protection|SC-7(4)]]
+
+- **Controls:** SC-7(4)(e)
+- All exceptions to traffic flow policy (firewall rules, permitted connections) must be reviewed **at least every 180 days** or upon any change in the threat environment. Stale exceptions must be removed or re-justified.
 
 ---
 
@@ -138,6 +184,33 @@ related:
 
 ## Vulnerability Management
 
+### Patch Installation SLA — 30 Days (SI-2)
+
+> [!quote] FedRAMP Moderate — SI-2(c) Parameter
+> "SI-2 (c) [within thirty (30) days of release of updates]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#SI-2 — Flaw Remediation|SI-2]]
+
+- **Controls:** SI-2(c)
+- Security-relevant software and firmware updates must be installed **within 30 days of release**. This is a fixed FedRAMP parameter — not organization-defined. CISA KEV deadlines supersede this when earlier.
+
+### Remediation SLAs by Severity (RA-5)
+
+> [!quote] FedRAMP Moderate — RA-5(d) Parameters
+> "RA-5 (d) [high-risk vulnerabilities mitigated within thirty (30) days from date of discovery; moderate-risk vulnerabilities mitigated within ninety (90) days from date of discovery; low risk vulnerabilities mitigated within one hundred and eighty (180) days from date of discovery]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#RA-5 — Vulnerability Monitoring and Scanning|RA-5]]
+
+- **Controls:** RA-5(d)
+- Base remediation SLAs: **High → 30 days**, **Moderate → 90 days**, **Low → 180 days** from date of discovery. CISA KEV deadlines override these when they are earlier.
+
+### Automated Flaw Remediation Status — Monthly (SI-2(2))
+
+> [!quote] FedRAMP Moderate — SI-2(2) Parameters
+> "SI-2 (2)-2 [at least monthly]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#SI-2 (2) — Flaw Remediation|SI-2(2)]]
+
+- **Controls:** SI-2(2)
+- Automated mechanisms must verify that security-relevant software and firmware updates are installed across all system components **at least monthly**. Supports patch compliance evidence for ConMon.
+
 ### CISA KEV Remediation Supersedes FedRAMP SLAs (RA-5)
 
 > [!quote] FedRAMP Moderate — RA-5(d) Requirement
@@ -167,6 +240,28 @@ related:
 - **Controls:** CA-8, CA-8(1)
 - Penetration testing required **at least annually** by an **independent** team. Functional testing must occur prior to initial authorization. Annual functional testing may be concurrent with pen testing.
 - Reference: FedRAMP Penetration Test Guidance.
+
+---
+
+## System Integrity
+
+### Security Function Verification — Monthly (SI-6)
+
+> [!quote] FedRAMP Moderate — SI-6(b) Parameters
+> "SI-6 (b) -1 [to include upon system startup and/or restart] -2 [at least monthly]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#SI-6 — Security and Privacy Function Verification|SI-6]]
+
+- **Controls:** SI-6(b)
+- Security functions must be verified **upon every system startup/restart AND at least monthly**. Verification must be automated and the results must feed into ConMon evidence.
+
+### Software and Firmware Integrity Checks — Monthly (SI-7(1))
+
+> [!quote] FedRAMP Moderate — SI-7(1) Parameters
+> "SI-7 (1)-3 [at least monthly]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#SI-7 (1) — Software, Firmware, and Information Integrity|SI-7(1)]]
+
+- **Controls:** SI-7(1)
+- Integrity checks on software and firmware must be performed **at least monthly**. Detects unauthorized modification of system components between assessments.
 
 ---
 
@@ -356,6 +451,24 @@ related:
 
 ## System Inventory
 
+### Unauthorized Component Detection — 5-Minute Maximum (CM-8(3))
+
+> [!quote] FedRAMP Moderate — CM-8(3)(a) Parameters
+> "CM-8 (3) (a)-1 [automated mechanisms with a maximum five-minute delay in detection.] CM-8 (3) (a)-2 [continuously]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#CM-8 (3) — System Component Inventory|CM-8(3)]]
+
+- **Controls:** CM-8(3)
+- Automated mechanisms must **continuously** detect unauthorized components connecting to the network with a **maximum 5-minute detection delay**. Near-real-time rogue device detection is the standard — passive periodic scanning does not satisfy this.
+
+### Unsupported / End-of-Life Components (SA-22)
+
+> [!quote] FedRAMP Moderate — SA-22 Control Description
+> "Replace system components when support for the components is no longer available from the developer, vendor, or manufacturer; or Provide the following options for alternative sources for continued support for unsupported components [Selection: in-house support; organization-defined support from external providers]."
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#SA-22 — Unsupported System Components|SA-22]]
+
+- **Controls:** SA-22
+- EOL/unsupported components must be **replaced** or have a **documented alternative support plan** (in-house patching or contracted vendor support). Cannot leave unsupported components in the boundary without a written exception and compensating controls.
+
 ### Inventory Refresh Frequency (CM-8)
 
 > [!quote] FedRAMP Moderate — CM-8 Requirement
@@ -374,6 +487,50 @@ related:
 - **Controls:** CM-12, CM-12(1)
 - **Authority:** FedRAMP Authorization Boundary Guidance document
 - Information location documentation must align with the boundary definition — not a free-form narrative.
+
+---
+
+## Training
+
+### Security Awareness Training — Annual (AT-2, AT-2(2), AT-2(3))
+
+> [!quote] FedRAMP Moderate — AT-2 Parameters
+> "AT-2 (a) (1) [at least annually] — AT-2 (c) [at least annually]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#AT-2 — Literacy Training and Awareness|AT-2]]
+
+- **Controls:** AT-2, AT-2(2), AT-2(3)
+- All personnel must complete security awareness training **at least annually**. Training must explicitly cover **insider threat** (AT-2(2)) and **social engineering/phishing awareness** (AT-2(3)). Annual refresher and initial training upon onboarding.
+
+### Role-Based Security Training — Annual (AT-3)
+
+> [!quote] FedRAMP Moderate — AT-3 Parameters
+> "AT-3 (a) (1) [at least annually] — AT-3 (b) [at least annually]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#AT-3 — Role-Based Training|AT-3]]
+
+- **Controls:** AT-3
+- Personnel with assigned security roles must complete **role-specific training at least annually**. Covers privileged users, system administrators, ISSOs, and other personnel with security responsibilities.
+
+### Contingency Training Windows (CP-3)
+
+> [!quote] FedRAMP Moderate — CP-3(a) Requirement
+> "Privileged admins and engineers must take the basic contingency training within 10 days. Newly hired critical contingency personnel must take this more in-depth training within 60 days of hire date when the training will have more impact."
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#CP-3 — Contingency Training|CP-3]]
+
+> [!quote] FedRAMP Moderate — CP-3 Parameters
+> "CP-3 (a) (3) [at least annually] — CP-3 (b) [at least annually]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#CP-3 — Contingency Training|CP-3]]
+
+- **Controls:** CP-3
+- Privileged admins and engineers: basic contingency training within **10 days** of assignment. Critical contingency personnel (those with deep system context required): in-depth training within **60 days of hire**. All contingency personnel: annual refresher.
+
+### Incident Response Training Windows (IR-2)
+
+> [!quote] FedRAMP Moderate — IR-2 Parameters
+> "IR-2 (a) (1) [ten (10) days for privileged users, thirty (30) days for Incident Response roles] — IR-2 (a) (3) [at least annually] — IR-2 (b) [at least annually]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#IR-2 — Incident Response Training|IR-2]]
+
+- **Controls:** IR-2
+- Privileged users: IR training within **10 days** of assignment. Personnel in designated IR roles: within **30 days**. All IR personnel: annual refresher and simulated events annually.
 
 ---
 
@@ -456,17 +613,20 @@ related:
 |---|---|---|
 | **FedRAMP Documentation Package** | Use the FedRAMP ISCP template (not a custom format) for the contingency plan (CP-2). Include contingency test results as SSP Appendix G (CP-4). Submit POA&Ms at least monthly (CA-5). Document CISA BOD compliance status and list applicable directives in the SSP (SI-5). Establish a public/agency-accessible channel for communicating major system changes (CM-3). | FedRAMP standardizes package artifacts so agency AOs can review consistently across CSPs. Monthly POA&Ms and BOD status ensure ongoing federal oversight visibility. |
 | **Authentication & Identity** | All MFA must be phishing-resistant — FIDO2/WebAuthn or PIV/CAC (IA-2, IA-2(1), IA-2(2)). Authenticators must comply with NIST SP 800-63-3 IAL/AAL/FAL Level 2 (IA-5). Accept PIV/CAC for logical access; use only FIPS 201-approved products for PIV capability (IA-2(12), SA-4(10)). Do not enforce password rotation or special character rules; minimum 14 chars where MFA is unavailable (IA-5(1)). | NIST 800-63B supersedes legacy password complexity rules based on evidence they reduce security. Phishing-resistant MFA addresses credential theft as the leading federal breach vector. PIV/HSPD-12 is a federal identity standard since 2004. |
-| **Cryptography** | All cryptography must use FIPS 140-2 or 140-3 validated modules (SC-13). Applies to data in transit, at rest, backups, media transport, and VPN. SSP Section 10.3 must fully document all cryptographic modules for DAR and DIT (SC-8(1)). All DNS requests and HTTP traffic within the environment must be encrypted per OMB M-22-09 (SC-8). | FIPS 140 validation ensures cryptographic modules meet federal security standards. M-22-09 (Zero Trust Strategy) mandates encrypted internal traffic to eliminate implicit trust on federal networks. |
+| **Cryptography** | All cryptography must use FIPS 140-2 or 140-3 validated modules (SC-13). Applies to data in transit, at rest, backups, media transport, and VPN. SSP Section 10.3 must fully document all cryptographic modules for DAR and DIT (SC-8(1)). All DNS requests and HTTP traffic within the environment must be encrypted per OMB M-22-09 (SC-8). Protect confidentiality AND integrity of all federal customer data and system data at rest using cryptographic mechanisms (SC-28, SC-28(1)). Verify IaaS/PaaS encryption is correctly configured — default availability is not sufficient. Establish and manage cryptographic keys per federal cryptographic requirements (SC-12). | FIPS 140 validation ensures cryptographic modules meet federal security standards. M-22-09 (Zero Trust Strategy) mandates encrypted internal traffic. SC-28 requires active verification of at-rest encryption, not just capability availability — a common gap in IaaS-hosted environments. |
 | **DNS Security** | Implement DNSSEC on all authoritative DNS servers serving the CSO (SC-20). Implement DNSSEC on all internal recursive DNS servers; reject signed replies that fail validation (SC-21). Internal recursive DNS must reside inside the authorized boundary. | DNSSEC prevents DNS spoofing and cache poisoning attacks. A compromised DNS can redirect users to malicious infrastructure silently — critical for federal data integrity. |
 | **Email Security** | If the CSO sends email on behalf of government (notifications, workflow), implement DMARC on the sending domain per DHS BOD 18-01. | BOD 18-01 (2017) mandates DMARC to prevent domain spoofing of federal email, protecting agency recipients from phishing using the CSO's domain. |
-| **Vulnerability & Patch Management** | CISA KEV catalog deadlines supersede FedRAMP remediation SLAs — KEV items must be remediated by the CISA-specified date (RA-5(d)). Conduct monthly OS, database, web application, container, and service configuration scans (CA-7). An accredited independent assessor must scan OS/infrastructure/web apps/databases at least annually (RA-5(a)). Conduct annual penetration testing by an independent team (CA-8, CA-8(1)). | KEV items are actively exploited in the wild — CISA deadlines reflect operational threat intelligence, not just theoretical risk windows. Independent scanning prevents self-attestation bias. |
+| **Vulnerability & Patch Management** | Install security-relevant software and firmware updates within 30 days of release (SI-2(c)). Base remediation SLAs: High → 30 days, Moderate → 90 days, Low → 180 days from discovery (RA-5(d)). CISA KEV deadlines override base SLAs. Verify patch compliance via automated mechanisms monthly (SI-2(2)). Monthly OS, DB, web app, container, and service config scans (CA-7). Annual independent scan (RA-5(a)). Annual independent pen test (CA-8, CA-8(1)). | 30-day install mandate ensures critical patches are applied promptly independent of KEV listing. Severity-tiered SLAs align remediation urgency with risk. Monthly automated compliance checks prevent organizations from relying on self-reporting alone. |
 | **Audit Logging & Retention** | Retain audit logs online for at least 90 days (AU-11). Retain offline per NARA and M-21-31 requirements. In multi-tenant environments, provide per-tenant log export capability or store and make logs available in compliance with M-21-31 (AU-11, AU-6). | M-21-31 (2021) mandates federal log retention to enable incident investigation. Per-tenant access ensures agencies can perform their own FISMA oversight without depending solely on the CSP. |
 | **Incident Response** | Use the FISMA statutory definition of "incident" — not a narrower organizational definition (IR-4). Report incidents per US-CERT timelines in NIST SP 800-61 and the FedRAMP ConMon Playbook (IR-6). Name designated FedRAMP personnel in the IR plan (IR-8). Conduct IR functional testing before initial authorization and annually thereafter — may be concurrent with pen test (IR-3). | FISMA's definition is intentionally broad to ensure federal agencies are notified of all potential compromises. Narrow definitions are a common way CSPs inadvertently underreport. |
 | **Continuous Monitoring** | Conduct a full security control assessment at least annually (CA-2). CSOs with multiple agency ATOs must implement collaborative ConMon per the FedRAMP ConMon Playbook (CA-7). | Annual assessments ensure controls remain effective as systems evolve. Collaborative ConMon prevents duplicative agency audits while maintaining oversight breadth for multi-tenant CSOs. |
 | **Supply Chain & Acquisition** | Prohibit use of telecommunications products from NDAA §889-listed entities (Huawei, ZTE, Hytera, Hikvision, Dahua) (SA-4 / FAR 4.21). Supply chain vendors must align to NIST SP 800-171 or equivalent (SR-6). Document custody chain for replacement devices (SR-3). Establish zero-day/vuln notification process with vendors (SR-8). Require vendor attestation of software/patch authenticity and secure development pipeline (SR-11). | §889 bans specific vendors due to national security concerns (foreign adversary-controlled equipment). SP 800-171 extends CUI protection requirements into the supply chain, closing a common attack vector. |
 | **3rd Party & Independent Assessment** | All annual security assessments must be performed by an independent assessor (CA-2). Vulnerability scans must be performed by an accredited independent assessor annually (RA-5(a)). Penetration testing must be conducted by an independent team — no conflicts of interest with system development or operations (CA-8(1)). | Independence prevents self-attestation and conflict of interest. 3PAOs are accredited by the FedRAMP PMO specifically to ensure assessor quality and consistency across authorizations. |
+| **Training** | All personnel must complete security awareness training at least annually, explicitly covering insider threat (AT-2(2)) and social engineering/phishing (AT-2(3)). Personnel with security roles must complete role-based training at least annually (AT-3). Privileged users: IR training within 10 days of assignment; IR roles within 30 days (IR-2). Privileged admins: contingency training within 10 days; critical contingency personnel within 60 days of hire (CP-3). | Training mandates are federally fixed because "organization-defined" frequency produced inadequate and inconsistent results. Insider threat and phishing training specifically address the most common federal breach vectors. Onboarding windows ensure personnel are trained before they have meaningful system access. |
 | **Personnel Security** | Rescreen personnel per OPM/federal schedule: TS reinvestigation at year 5, Secret at year 10, Confidential at year 15; moderate-risk law enforcement/high public trust at year 5 (PS-3). Personnel accessing CUI must satisfy additional screening criteria (PS-3(3)). | OPM rescreening schedules reflect evolving insider threat risk over time. Personnel in CUI-access positions can affect multiple agencies if compromised. |
 | **Account Management** | Disable inactive temporary accounts within 24 hours (AC-2(3)). Disable inactive non-temporary accounts within 96 hours of last use (AC-2(2)). Disable accounts after 90 days of inactivity (AC-2(3)(d)). Review privileged account access quarterly; non-privileged annually (AC-2(j)). | Stale accounts are a primary lateral movement vector. FedRAMP fixes specific timeframes because "organization-defined" produced inconsistent results across CSPs. |
-| **Infrastructure Operations** | Refresh system component inventory at least monthly or on any change (CM-8). Restrict ports/protocols/services using DISA STIGs or CIS Benchmarks; custom list only if neither applies (CM-7). Sync clocks to NIST Internet Time Service with primary and secondary from different geographic regions (SC-45(1)). Align information location documentation to FedRAMP Authorization Boundary Guidance (CM-12). | Accurate inventories are prerequisite to vulnerability management. STIGs/CIS provide vetted federal hardening baselines. Time synchronization is required for log correlation and forensic integrity. |
+| **Boundary Protection** | Review all traffic flow policy exceptions (firewall rules, permitted connections) at least every 180 days or upon any change in threat environment (SC-7(4)(e)). | Stale firewall exceptions accumulate over time and become unreviewed attack surface. The 180-day cycle ensures exceptions are actively re-justified rather than passively inherited. |
+| **System Integrity** | Verify security functions upon every system startup/restart AND at least monthly (SI-6(b)). Perform software and firmware integrity checks at least monthly (SI-7(1)). | Monthly verification detects unauthorized modification of security functions between annual assessments. Integrity checks are a ConMon control — they generate continuous evidence, not just point-in-time snapshots. |
+| **Infrastructure Operations** | Refresh system component inventory at least monthly or on any change (CM-8). Deploy automated mechanisms to detect unauthorized components with a maximum 5-minute detection delay, running continuously (CM-8(3)). Replace or document alternative support for all unsupported/EOL components — cannot leave them in the boundary without a written plan (SA-22). Restrict ports/protocols/services using DISA STIGs or CIS Benchmarks; custom list only if neither applies (CM-7). Sync clocks to NIST Internet Time Service with primary and secondary from different geographic regions (SC-45(1)). Align information location documentation to FedRAMP Authorization Boundary Guidance (CM-12). | Near-real-time (5-minute) rogue device detection prevents unauthorized components from persisting in the boundary undetected. Unsupported components without a support plan are a known persistent exploit vector. |
 | **Contingency Planning** | Maintain at least 3 copies of user data, system data, and security documentation — at least 1 online (CP-9). Develop contingency test plans per NIST SP 800-34; include results in SSP Appendix G (CP-4). Define RTO-consistent timeframes for alternate processing and telecom sites (CP-7, CP-8). | The 3-copy minimum guards against simultaneous failure of primary and one backup. NIST 800-34 ensures plans are actionable and tested, not just documented. |
 | **Authorization Lifecycle** | Renew authorization per OMB Circular A-130 or upon significant change — not on a fixed calendar cycle (CA-6). Notify all Authorizing Officials of risk assessment findings (RA-3(e)). | OMB A-130 ties reauthorization to meaningful risk changes. Multi-AO notification ensures all relying agencies are informed of updated risk posture. |
