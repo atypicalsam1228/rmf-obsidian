@@ -69,6 +69,34 @@ related:
 - PIV/CAC must be accepted for logical and physical access. DoD CAC is a PIV credential.
 - Products used for PIV capability must appear on the FIPS 201-approved products list.
 
+### Identifier Non-Reuse (IA-4(d))
+
+> [!quote] FedRAMP Moderate — IA-4(d) Parameters
+> "IA-4 (d) [at least two (2) years]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#IA-4 — Identifier Management|IA-4]]
+
+- **Controls:** IA-4(d)
+- Identifiers (user accounts, device IDs, service accounts) must not be reused for **at least 2 years** after deactivation. Prevents historical access from being inherited by a new account or subject with the same identifier.
+
+### Identifier Distinguishing — Contractors and Foreign Nationals (IA-4(4))
+
+> [!quote] FedRAMP Moderate — IA-4(4) Parameters
+> "IA-4 (4) [contractors; foreign nationals]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#IA-4 (4) — Identifier Management|IA-4(4)]]
+
+- **Controls:** IA-4(4)
+- System identifiers must distinguish contractors and foreign nationals from federal employees. This is a fixed FedRAMP parameter — the two categories are non-negotiable, though organizations may add others.
+
+### Identity Proofing (IA-12, IA-12(5))
+
+> [!quote] FedRAMP Moderate — IA-12 Guidance
+> "In accordance with NIST SP 800-63A Enrollment and Identity Proofing."
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#IA-12 — Identity Proofing|IA-12]]
+
+- **Controls:** IA-12, IA-12(5)
+- **Standard:** NIST SP 800-63A (IAL)
+- Identity proofing must follow NIST SP 800-63A. FedRAMP Moderate requires IAL2 for most use cases — in-person or remote proofing with identity document validation. IA-12(5) binds authenticators to the proofed identity before access is granted.
+
 ---
 
 ## Cryptography
@@ -262,6 +290,26 @@ related:
 
 - **Controls:** SI-7(1)
 - Integrity checks on software and firmware must be performed **at least monthly**. Detects unauthorized modification of system components between assessments.
+
+### Malicious Code Protection — Signature and Non-Signature (SI-3)
+
+> [!quote] FedRAMP Moderate — SI-3 Parameters
+> "SI-3 (a) [signature based and non-signature based] — SI-3 (c) (1)-1 [at least weekly] — SI-3 (c) (1)-2 [to include endpoints and network entry and exit points] — SI-3 (c) (2)-1 [to include blocking and quarantining] — SI-3 (c) (2)-2 [administrator or defined security personnel near-realtime]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#SI-3 — Malicious Code Protection|SI-3]]
+
+- **Controls:** SI-3
+- Malware protection must use **both** signature-based AND non-signature-based detection (behavioral/heuristic). Signature-only solutions do not satisfy FedRAMP Moderate.
+- Scanning must cover **endpoints AND network entry/exit points** and run **at least weekly**.
+- On detection: must **block AND quarantine**. Must alert administrators or defined security personnel in **near-real-time**.
+
+### Inbound/Outbound Traffic Monitoring — Continuously (SI-4(4))
+
+> [!quote] FedRAMP Moderate — SI-4(4)(b) Parameters
+> "SI-4 (4) (b)-1 [continuously]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#SI-4 (4) — System Monitoring|SI-4(4)]]
+
+- **Controls:** SI-4(4)
+- Inbound and outbound traffic at system boundaries must be monitored **continuously**. The FedRAMP parameter replaces "organization-defined frequency" with a fixed continuous requirement. Periodic or batch-based boundary monitoring does not satisfy this.
 
 ---
 
@@ -581,6 +629,51 @@ related:
 - **Authority:** NIST Internet Time Service
 - Primary and secondary NTP servers must be from NIST; secondary from different geographic region. Non-Windows systems must sync to DC emulator or same source.
 
+### Collaborative Computing Device Disablement (SC-15)
+
+> [!quote] FedRAMP Moderate — SC-15(a) Parameters
+> "SC-15 (a) [no exceptions for computing devices]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#SC-15 — Collaborative Computing Devices and Applications|SC-15]]
+
+> [!quote] FedRAMP Moderate — SC-15 Requirement
+> "The CSP must disable collaborative computing devices and/or applications (when not in use) through software — physical disconnect is not sufficient."
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#SC-15 — Collaborative Computing Devices and Applications|SC-15]]
+
+- **Controls:** SC-15
+- **No exceptions** are permitted for computing devices — all collaborative computing capability (cameras, microphones, screen sharing) must be disabled when not in use.
+- Disablement must be via **software controls**, not physical disconnection. OS/platform-level enforcement is required; reliance on users unplugging hardware does not satisfy this.
+
+---
+
+## Media Protection
+
+### Digital and Non-Digital Media Transport (MP-5)
+
+> [!quote] FedRAMP Moderate — MP-5(a) Parameters
+> "MP-5 (a) [all media with sensitive information] — MP-5 (a)-2 [prior to leaving secure/controlled environment: for digital media, encryption in compliance with Federal requirements and utilizes FIPS validated or NSA approved cryptography (see SC-13.); for non-digital media, secured in locked container]"
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#MP-5 — Media Transport|MP-5]]
+
+- **Controls:** MP-5
+- **All media containing sensitive information** must be protected before leaving a secure or controlled environment:
+  - **Digital media:** encrypt using FIPS 140-2/3 validated or NSA-approved cryptography (cross-reference SC-13)
+  - **Non-digital media:** secure in a locked container
+- The protection requirement triggers before leaving the secure zone, not only when media exits the building.
+
+---
+
+## Maintenance
+
+### Maintenance Personnel — Non-Cleared Escort Requirements (MA-5(1))
+
+> [!quote] FedRAMP Moderate — MA-5(1) Requirement
+> "Requirement: Only MA-5 (1) (a) (1) is required by FedRAMP Moderate Baseline."
+> — [[Sources/FedRAMP/fedramp-moderate-baseline#MA-5 (1) — Maintenance Personnel|MA-5(1)]]
+
+- **Controls:** MA-5(1)(a)(1)
+- Maintenance personnel who are not cleared or who are not US citizens must be **escorted and continuously supervised** during all maintenance activities within the boundary.
+- Only MA-5(1)(a)(1) is required at FedRAMP Moderate — the full MA-5(1) enhancement is not mandated. This is a scoping clarification in the baseline.
+- Continuous supervision is not periodic check-ins — the escort must maintain visual/physical contact throughout the activity.
+
 ---
 
 ## Acquisition & Compliance
@@ -612,7 +705,7 @@ related:
 | Requirement Area | What is Needed | Rationale |
 |---|---|---|
 | **FedRAMP Documentation Package** | Use the FedRAMP ISCP template (not a custom format) for the contingency plan (CP-2). Include contingency test results as SSP Appendix G (CP-4). Submit POA&Ms at least monthly (CA-5). Document CISA BOD compliance status and list applicable directives in the SSP (SI-5). Establish a public/agency-accessible channel for communicating major system changes (CM-3). | FedRAMP standardizes package artifacts so agency AOs can review consistently across CSPs. Monthly POA&Ms and BOD status ensure ongoing federal oversight visibility. |
-| **Authentication & Identity** | All MFA must be phishing-resistant — FIDO2/WebAuthn or PIV/CAC (IA-2, IA-2(1), IA-2(2)). Authenticators must comply with NIST SP 800-63-3 IAL/AAL/FAL Level 2 (IA-5). Accept PIV/CAC for logical access; use only FIPS 201-approved products for PIV capability (IA-2(12), SA-4(10)). Do not enforce password rotation or special character rules; minimum 14 chars where MFA is unavailable (IA-5(1)). | NIST 800-63B supersedes legacy password complexity rules based on evidence they reduce security. Phishing-resistant MFA addresses credential theft as the leading federal breach vector. PIV/HSPD-12 is a federal identity standard since 2004. |
+| **Authentication & Identity** | All MFA must be phishing-resistant — FIDO2/WebAuthn or PIV/CAC (IA-2, IA-2(1), IA-2(2)). Authenticators must comply with NIST SP 800-63-3 IAL/AAL/FAL Level 2 (IA-5). Accept PIV/CAC for logical access; use only FIPS 201-approved products for PIV capability (IA-2(12), SA-4(10)). Do not enforce password rotation or special character rules; minimum 14 chars where MFA is unavailable (IA-5(1)). Identity proof users per NIST SP 800-63A IAL2 and bind authenticators before granting access (IA-12, IA-12(5)). Identifiers must not be reused for at least 2 years after deactivation (IA-4(d)). Identifiers must distinguish contractors and foreign nationals (IA-4(4)). | NIST 800-63B supersedes legacy password complexity rules. Phishing-resistant MFA addresses credential theft as the leading federal breach vector. PIV/HSPD-12 is a federal identity standard since 2004. Identifier non-reuse prevents historical access from being inherited by a new subject with the same ID. Contractor/foreign national distinguishing enables access pattern analysis and supports US Person oversight obligations. |
 | **Cryptography** | All cryptography must use FIPS 140-2 or 140-3 validated modules (SC-13). Applies to data in transit, at rest, backups, media transport, and VPN. SSP Section 10.3 must fully document all cryptographic modules for DAR and DIT (SC-8(1)). All DNS requests and HTTP traffic within the environment must be encrypted per OMB M-22-09 (SC-8). Protect confidentiality AND integrity of all federal customer data and system data at rest using cryptographic mechanisms (SC-28, SC-28(1)). Verify IaaS/PaaS encryption is correctly configured — default availability is not sufficient. Establish and manage cryptographic keys per federal cryptographic requirements (SC-12). | FIPS 140 validation ensures cryptographic modules meet federal security standards. M-22-09 (Zero Trust Strategy) mandates encrypted internal traffic. SC-28 requires active verification of at-rest encryption, not just capability availability — a common gap in IaaS-hosted environments. |
 | **DNS Security** | Implement DNSSEC on all authoritative DNS servers serving the CSO (SC-20). Implement DNSSEC on all internal recursive DNS servers; reject signed replies that fail validation (SC-21). Internal recursive DNS must reside inside the authorized boundary. | DNSSEC prevents DNS spoofing and cache poisoning attacks. A compromised DNS can redirect users to malicious infrastructure silently — critical for federal data integrity. |
 | **Email Security** | If the CSO sends email on behalf of government (notifications, workflow), implement DMARC on the sending domain per DHS BOD 18-01. | BOD 18-01 (2017) mandates DMARC to prevent domain spoofing of federal email, protecting agency recipients from phishing using the CSO's domain. |
@@ -626,7 +719,10 @@ related:
 | **Personnel Security** | Rescreen personnel per OPM/federal schedule: TS reinvestigation at year 5, Secret at year 10, Confidential at year 15; moderate-risk law enforcement/high public trust at year 5 (PS-3). Personnel accessing CUI must satisfy additional screening criteria (PS-3(3)). | OPM rescreening schedules reflect evolving insider threat risk over time. Personnel in CUI-access positions can affect multiple agencies if compromised. |
 | **Account Management** | Disable inactive temporary accounts within 24 hours (AC-2(3)). Disable inactive non-temporary accounts within 96 hours of last use (AC-2(2)). Disable accounts after 90 days of inactivity (AC-2(3)(d)). Review privileged account access quarterly; non-privileged annually (AC-2(j)). | Stale accounts are a primary lateral movement vector. FedRAMP fixes specific timeframes because "organization-defined" produced inconsistent results across CSPs. |
 | **Boundary Protection** | Review all traffic flow policy exceptions (firewall rules, permitted connections) at least every 180 days or upon any change in threat environment (SC-7(4)(e)). | Stale firewall exceptions accumulate over time and become unreviewed attack surface. The 180-day cycle ensures exceptions are actively re-justified rather than passively inherited. |
-| **System Integrity** | Verify security functions upon every system startup/restart AND at least monthly (SI-6(b)). Perform software and firmware integrity checks at least monthly (SI-7(1)). | Monthly verification detects unauthorized modification of security functions between annual assessments. Integrity checks are a ConMon control — they generate continuous evidence, not just point-in-time snapshots. |
+| **System Integrity** | Verify security functions upon every system startup/restart AND at least monthly (SI-6(b)). Perform software and firmware integrity checks at least monthly (SI-7(1)). Deploy both signature-based AND non-signature-based malware protection; scan endpoints and network entry/exit points at least weekly; block and quarantine on detection; near-real-time alerts to admins (SI-3). Monitor inbound and outbound boundary traffic continuously — periodic scanning does not satisfy this (SI-4(4)). | Monthly verification detects unauthorized modification between annual assessments. Non-signature detection catches threats that evade known-signature databases. Continuous boundary monitoring is a Zero Trust requirement — batch monitoring creates blind spots between scans. |
 | **Infrastructure Operations** | Refresh system component inventory at least monthly or on any change (CM-8). Deploy automated mechanisms to detect unauthorized components with a maximum 5-minute detection delay, running continuously (CM-8(3)). Replace or document alternative support for all unsupported/EOL components — cannot leave them in the boundary without a written plan (SA-22). Restrict ports/protocols/services using DISA STIGs or CIS Benchmarks; custom list only if neither applies (CM-7). Sync clocks to NIST Internet Time Service with primary and secondary from different geographic regions (SC-45(1)). Align information location documentation to FedRAMP Authorization Boundary Guidance (CM-12). | Near-real-time (5-minute) rogue device detection prevents unauthorized components from persisting in the boundary undetected. Unsupported components without a support plan are a known persistent exploit vector. |
 | **Contingency Planning** | Maintain at least 3 copies of user data, system data, and security documentation — at least 1 online (CP-9). Develop contingency test plans per NIST SP 800-34; include results in SSP Appendix G (CP-4). Define RTO-consistent timeframes for alternate processing and telecom sites (CP-7, CP-8). | The 3-copy minimum guards against simultaneous failure of primary and one backup. NIST 800-34 ensures plans are actionable and tested, not just documented. |
+| **Collaborative Computing** | Disable all collaborative computing devices (cameras, microphones, screen sharing) when not in use — no exceptions for computing devices (SC-15). Disablement must be enforced via software, not physical disconnection. | Software-enforced disablement prevents data exfiltration or eavesdropping via unauthorized recording. Physical disconnection is not an enforceable, auditable control — software policy is. |
+| **Media Protection** | All media containing sensitive information must be protected before leaving a secure area: digital media requires FIPS 140-2/3 or NSA-approved encryption (MP-5, SC-13); non-digital media requires a locked container (MP-5). | Media-in-transit is a common breach vector. FIPS encryption alignment ensures media protection meets the same cryptographic standard as the rest of the boundary. |
+| **Maintenance Personnel** | Non-cleared or non-US-citizen maintenance personnel must be escorted and continuously supervised throughout all maintenance activities within the boundary (MA-5(1)(a)(1)). Only MA-5(1)(a)(1) is required at FedRAMP Moderate. | Unescorted non-cleared maintenance personnel represent an insider threat and potential foreign intelligence threat vector. Continuous supervision (not periodic check-ins) is required to prevent unauthorized system access during maintenance windows. |
 | **Authorization Lifecycle** | Renew authorization per OMB Circular A-130 or upon significant change — not on a fixed calendar cycle (CA-6). Notify all Authorizing Officials of risk assessment findings (RA-3(e)). | OMB A-130 ties reauthorization to meaningful risk changes. Multi-AO notification ensures all relying agencies are informed of updated risk posture. |
