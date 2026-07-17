@@ -93,6 +93,7 @@
 ## DoD/FedRAMP Cross-References
 
 - [[dod-srg-control-crosswalk-v1-0]] — DoD SRG control crosswalk mapping to FedRAMP
+- [[fedramp-equivalency-cloud-service-providers]] — DoD CIO Memo (Dec 2023): FedRAMP Moderate equivalency requirements for CSPs handling CUI
 
 ## Other
 
