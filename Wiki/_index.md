@@ -65,6 +65,7 @@
 
 - [[dod-srg-cloud-impact-levels]] — IL2/IL4/IL5/IL6 definitions, FedRAMP+ concept, DoD PA pathway (CSP SRG V1R6)
 - [[dodi-8520-04-access-management-icam]] — DoDI 8520.04: ICAM access management for DoD IT systems
+- [[dod-ato-with-conditions]] — DoD RMF authorization decision types: ATO with conditions, IATT, cATO, and DISA PA conditions; comparison table; sources to ingest (DoDI 8510.01, DevSecOps Ref Design)
 
 ## Personnel Security / US Person Requirements
 
