@@ -14,8 +14,6 @@
 - [[fedramp-baseline-overview]] — Comparison of Low / LI-SaaS / Moderate / High baselines, parameter overrides, use cases
 - [[fedramp-moderate-federal-mandates]] — All federal mandate requirements baked into FedRAMP Moderate: phishing-resistant MFA, FIPS, DNSSEC, DMARC, KEV, M-21-31, BODs, Section 889, and more
 - [[fedramp-soc-bau-tracker-build-lessons]] — V5→V6 gap analysis: missed hard requirements, best-practice/requirement confusion instances, M-21-31 rescission, root cause analysis, corrective actions
-- [[ifs-soc-fedramp-control-verification]] — Source-verified control parameters from IFS SOC BAU session; 4 confirmed, 3 discrepancies corrected (IR-6 timeframe, AU-11 online retention, RA-10/PM-16 baseline inclusion)
-
 - [[fedramp-training-access-prerequisites]] — AT-3/PL-4 as hard access gates before provisioning; IR-2 post-access windows; AC-2 enforcement path for missed training deadlines
 - [[fedramp-access-control]] — AC family controls, FedRAMP IAM parameters, MFA requirements, AWS implementation
 - [[fedramp-aws-config-conformance-packs]] — AWS Config rules for FedRAMP levels, parameter values, deployment guidance

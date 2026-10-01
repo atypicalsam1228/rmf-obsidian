@@ -9,5 +9,7 @@ Sources/Mission-OS-SOPs/
 Wiki/Mission-OS-SOP-Drafts/
 Wiki/mission-os-sop-update-plan.md
 Wiki/mission-os-tool-to-sop-crossref.md
+Sources/FedRAMP/mission-os-vm-plan-fedramp-moderate.md
+Wiki/ifs-soc-fedramp-control-verification.md
 .graphify_python
 graphify-out/

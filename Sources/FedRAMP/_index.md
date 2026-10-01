@@ -1,6 +1,6 @@
 # FedRAMP Sources
 
-> 57 authoritative source files. Updated 2026-05-08.
+> 56 authoritative source files. Updated 2026-05-08.
 
 ## Baselines
 
@@ -87,7 +87,6 @@
 
 ## Implementation Plans & Assessments
 
-- [[mission-os-vm-plan-fedramp-moderate]] — FedRAMP Moderate OS/VM implementation plan
 - [[cloud-csp-onboarding-questionnaire-04-14-2025]] — Cloud CSP onboarding questionnaire (April 2025)
 
 ## DoD/FedRAMP Cross-References
