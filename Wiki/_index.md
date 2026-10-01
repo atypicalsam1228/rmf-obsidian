@@ -66,6 +66,7 @@
 - [[dod-srg-cloud-impact-levels]] — IL2/IL4/IL5/IL6 definitions, FedRAMP+ concept, DoD PA pathway (CSP SRG V1R6)
 - [[dodi-8520-04-access-management-icam]] — DoDI 8520.04: ICAM access management for DoD IT systems
 - [[dod-ato-with-conditions]] — DoD RMF authorization decision types: ATO with conditions, IATT, cATO, and DISA PA conditions; comparison table; sources to ingest (DoDI 8510.01, DevSecOps Ref Design)
+- [[iatt-artifact-requirements-ussf]] — USSF OSB AO minimum artifact checklist for IATT eMASS submissions; initial vs. subsequent IATT distinctions; eMASS 180-day limit; topology diagram requirements; separate IATT workflow discontinued (June 2026)
 
 ## Personnel Security / US Person Requirements
 

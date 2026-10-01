@@ -14,8 +14,9 @@
 | NIST AI RMF 1.0 | **Ingested** | 1 | Full AI RMF publication extracted from PDF |
 | NIST 800-171 Rev 3 | **Ingested** | 2 | Security requirements + AWS Config mappings |
 | DoD SRG | **Ingested** | 6 | Cloud Computing SRG Y25M12 — CSP SRG V1R6 + Mission Owner NET/OS SRGs (XCCDF) + DoDI 8520.04 Access Management |
+| Mission OS SOPs | **Ingested** | 23 | Mission OS Core SOPs Rev. 5 — all 20 NIST control family SOPs + SecRel Pipeline SOP + IR Plan (DRAFT) + Discovery Questionnaire |
 
-**Total: 103 source files across 7 frameworks.**
+**Total: 126 source files across 8 frameworks.**
 
 ## Frameworks
 
@@ -26,3 +27,4 @@
 - [[Sources/NIST-AI-RMF/_index|NIST AI RMF]] — 1 source file (complete AI RMF 1.0)
 - [[Sources/NIST-800-171/_index|NIST 800-171]] — 2 source files (Rev 3 requirements + AWS Config mappings)
 - [[Sources/DoD-SRG/_index|DoD SRG]] — 5 source files (Cloud Computing SRG Y25M12 — CSP + Mission Owner NET/OS)
+- [[Sources/Mission-OS-SOPs/_index|Mission OS SOPs]] — 23 source files (Mission OS Core SOPs Rev. 5, all NIST control families)

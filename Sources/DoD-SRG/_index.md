@@ -1,11 +1,22 @@
 # DoD SRG Sources
 
-> 6 authoritative source files.
+> 8 authoritative source files.
 > DISA Cloud Computing Security Requirements Guide (SRG) — December 2025 release (Y25M12).
 > DoDI 8520.04 — Access Management for DoD Information Systems (September 3, 2024).
+> DoDI 8510.01 — Risk Management Framework (RMF) for DoD Information Technology (ingested 2026-07-17).
+
+## DISA Connection Process Guide
+
+- [[disa-connection-process-guide-v6-1]] — DISA CPG v6.1 (March 2023): 16-step DISN connection lifecycle, IATT accepted as authorization decision type, ATC under IATT normally <90 days, required documents (ADD, CSSP, topology, CTM), SNAP/SGS registration; not applicable to airgapped systems
+
+## USSF Authorization Policy
+
+- [[ussf-osb-ao-iatt-artifact-requirements-2026]] — USSF OSB AO memo (3 June 2026): minimum eMASS artifact requirements for IATT submissions; initial vs. subsequent IATT distinctions; eMASS 180-day limit; topology standards; separate IATT workflow discontinued
 
 ## DoD Instructions
 
+- [[dodi-8510-01-rmf-dod-it]] — DoDI 8510.01: RMF for DoD IT — ATO decision types, AO authority, IATT, POA&M lifecycle, 6-step RMF process (text-searchable markdown, extracted 2026-07-17)
+- [[dodi-8510-01-rmf-dod-it.pdf]] — DoDI 8510.01: RMF for DoD IT — original PDF (binary, not grep-searchable)
 - [[dodi-8520-04-access-management]] — DoDI 8520.04: Access Management for DoD IT Systems — ICAM, explicit/dynamic/hybrid access, NPE controls, SOD, access reviews, Zero Trust alignment (September 3, 2024)
 
 ## SRG Overview Documents
